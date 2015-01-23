@@ -1,62 +1,89 @@
-<?php
+<?php namespace Toplan\FilterManager;
 
+/**
+ * Class FilterManager
+ * @package toplan\FilterManager
+ */
 class FilterManager{
 
     const ALL = 'FilterManager_All';
 
     /**
-     * current filters 筛选器
+     * core data:current filters
      * exp:['gender'=>'male','city'=>'beijing',...]
      * @var array
      */
     protected  $filters = [];
 
     /**
-     * blacklist 黑名单
+     * blacklist for filter
      * @var array
      */
     protected  $blackList = [];
 
     /**
-     * boot url 不带参数url
-     *  without params,exp:'www.xxx.com/goods'
+     * base url(without params)
+     * exp:'www.xxx.com/goods'
      * @var string
      */
-    protected  $bootUrl = "";
+    protected  $baseUrl = "";
 
 
-    public function __construct(Array $filters,$bootUrl,Array $blackList){
+    public function __construct(Array $filters,$baseUrl,Array $blackList){
         $this->filters   = $filters;
-        $this->bootUrl   = $bootUrl;
+        $this->$baseUrl   = $baseUrl;
         $this->blackList = $blackList;
     }
 
-
-    public static function create(Array $filters,$bootUrl = '/',Array $blackList = ['page','pageindex']){
-        $fm = new FilterManager($filters,$bootUrl,$blackList);
+    /**create a instance of FilterManger
+     * @param array  $filters
+     * @param string $baseUrl
+     * @param array  $blackList
+     *
+     * @return FilterManager
+     */
+    public static function create(Array $filters,$baseUrl = '/',Array $blackList = ['page','pageindex']){
+        $fm = new FilterManager($filters,$baseUrl,$blackList);
         return $fm;
     }
 
-
-    public function setBootUrl($bootUrl){
-        $this->bootUrl->$bootUrl;
+    /**set base url
+     * @param $baseUrl
+     *
+     * @return $this
+     */
+    public function setBootUrl($baseUrl){
+        $this->baseUrl->$baseUrl;
         return $this;
     }
 
-
+    /**set black list for filters
+     * @param array $blackList
+     *
+     * @return $this
+     */
     public function setBlackList(Array $blackList){
         $this->blackList = $blackList;
         return $this;
     }
 
-
+    /**add filter
+     * @param        $name
+     * @param string $value
+     *
+     * @return $this
+     */
     public function addFilter($name,$value = ''){
         if($name)
             array_push($this->filters,["$name"=>$value]);
         return $this;
     }
 
-
+    /**remove filter
+     * @param $name
+     *
+     * @return $this
+     */
     public function removeFilter($name){
         if($name){
             foreach($this->filters as $filter_name => $filter_value){
@@ -97,8 +124,7 @@ class FilterManager{
         }
     }
 
-    /**
-     * get full url(with params)
+    /**get full url(with params)
      *
      * @param string $name
      * filter name
@@ -108,7 +134,7 @@ class FilterManager{
      * Whether to support more value filtering,
      * if $value == FilterManager::ALL, this parameter does`t work
      * @param array $LinkageRemoveFilters
-     * Linkage to remove the filter
+     * Linkage to filter the filter
      * @param array $blackList
      *
      * @return string
@@ -118,10 +144,10 @@ class FilterManager{
         $current_filters = $this->filters;
 
         if(!$name || !$value)
-            return $this->bootUrl;
+            return $this->baseUrl;
 
         if(!$current_filters || !count($current_filters))
-            return  $value!=FilterManager::ALL ? "$this->bootUrl?$name=$value" : $this->bootUrl;
+            return  $value!=FilterManager::ALL ? "$this->baseUrl?$name=$value" : $this->baseUrl;
 
         if(!isset($current_filters["$name"]) && $value != FilterManager::ALL){
             if($this->isPass($name,$LinkageRemoveFilters,$blackList))
@@ -150,17 +176,14 @@ class FilterManager{
                 }
             }
         }
-        $url = "$this->bootUrl?";
         $params = [];
         foreach($filters as $key => $filter){
             if($filter) $params[] = "$key=$filter";
         }
-        return $url . implode('&',$params);
+        return "$this->baseUrl?" . implode('&',$params);
     }
 
-
-    /**
-     * filter filters
+    /**filter filters
      * @param       $filter_name
      * @param array $LinkageRemoveFilters
      * @param array $blackList
