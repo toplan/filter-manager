@@ -1,6 +1,8 @@
 {
-    "name": "vendor/filter-manager",
+    "name": "toplan/filter-manager",
     "description": "Filter manager package for product list,elegant generate url.",
+    "version": "1.4.2",
+    "keywords": ["filter", "product list"],
     "authors": [
         {
             "name": "toplan",
@@ -13,7 +15,7 @@
     },
     "autoload": {
         "psr-0": {
-            "Vendor\\FilterManager": "src/"
+            "Toplan\\FilterManager": "src/"
         }
     },
     "minimum-stability": "stable"
