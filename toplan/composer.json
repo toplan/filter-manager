@@ -1,6 +1,6 @@
 {
     "name": "vendor/filter-manager",
-    "description": "",
+    "description": "Filter manager package for product list,elegant generate url.",
     "authors": [
         {
             "name": "toplan",

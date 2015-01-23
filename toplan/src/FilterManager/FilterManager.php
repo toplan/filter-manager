@@ -68,7 +68,7 @@ class FilterManager{
     }
 
     /**
-     * 筛选器中是否有某筛选条件的某个值
+     * is active
      *
      * @param string $name
      * filter name
@@ -99,7 +99,6 @@ class FilterManager{
 
     /**
      * get full url(with params)
-     * 获取待参数的url
      *
      * @param string $name
      * filter name
@@ -109,7 +108,7 @@ class FilterManager{
      * Whether to support more value filtering,
      * if $value == FilterManager::ALL, this parameter does`t work
      * @param array $LinkageRemoveFilters
-     * Linkage to remove the filter联动过滤
+     * Linkage to remove the filter
      * @param array $blackList
      *
      * @return string
@@ -161,7 +160,7 @@ class FilterManager{
 
 
     /**
-     * 是否通过 联动过滤 和 黑名单过滤
+     * filter filters
      * @param       $filter_name
      * @param array $LinkageRemoveFilters
      * @param array $blackList
