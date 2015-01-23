@@ -1,0 +1,20 @@
+{
+    "name": "vendor/filter-manager",
+    "description": "",
+    "authors": [
+        {
+            "name": "toplan",
+            "email": "1083439280@qq.com"
+        }
+    ],
+    "require": {
+        "php": ">=5.4.0",
+        "illuminate/support": "4.2.*"
+    },
+    "autoload": {
+        "psr-0": {
+            "Vendor\\FilterManager": "src/"
+        }
+    },
+    "minimum-stability": "stable"
+}
