@@ -28,10 +28,14 @@ class FilterManager{
      */
     protected  $baseUrl = "";
 
-
-    public function __construct(Array $filters,$baseUrl,Array $blackList){
+    /**
+     * @param array $filters
+     * @param       $baseUrl
+     * @param array $blackList
+     */
+    public function __construct(Array $filters,$baseUrl = "",Array $blackList = array()){
         $this->filters   = $filters;
-        $this->$baseUrl   = $baseUrl;
+        $this->baseUrl   = str_replace('?','',$baseUrl);
         $this->blackList = $blackList;
     }
 
@@ -42,7 +46,7 @@ class FilterManager{
      *
      * @return FilterManager
      */
-    public static function create(Array $filters,$baseUrl = '/',Array $blackList = ['page','pageindex']){
+    public static function create(Array $filters,$baseUrl = "",Array $blackList = array()){
         $fm = new FilterManager($filters,$baseUrl,$blackList);
         return $fm;
     }
@@ -85,13 +89,22 @@ class FilterManager{
      * @return $this
      */
     public function removeFilter($name){
-        if($name){
-            foreach($this->filters as $filter_name => $filter_value){
-                if($filter_name == $name)
-                    unset($this->filters["$filter_name"]);
-            }
+        if($name && isset($this->filters["$name"])){
+            unset($this->filters["$name"]);
         }
         return $this;
+    }
+
+    /**has filter?
+     * @param $name
+     *
+     * @return bool
+     */
+    public function has($name){
+        if( $name && isset($this->filters["$name"]) ){
+            return $this->filters["$name"];
+        }
+        return false;
     }
 
     /**
@@ -117,11 +130,10 @@ class FilterManager{
                 return $falseReturn;
         }
         $arra = explode(',',$current_filters["$name"]);
-        if(in_array($value,$arra)){
+        if( in_array($value,$arra) )
             return $trueReturn;
-        }else{
+        else
             return $falseReturn;
-        }
     }
 
     /**get full url(with params)
@@ -198,7 +210,7 @@ class FilterManager{
         if( ! $blackList || count($blackList) == 0 ){
             $blackList = $this->blackList;
         }
-        if(in_array($filter_name,$blackList))
+        if( in_array($filter_name,$blackList) )
             return false;
         return true;
     }
