@@ -15,7 +15,7 @@
     },
     "autoload": {
         "classmap": [
-            "src/FilterManager.php"
+            "src/"
         ],
         "psr-0": {
             "Toplan\\FilterManager": "src/"
