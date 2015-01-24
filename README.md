@@ -80,10 +80,15 @@ Find the aliases key in app/config/app.php.
     FilterManager::url($filter_name,$filter_value,$multi,$LinkageRemoveFilters,$blackList)
  ```
  $filter_name:filter name,required.
+ 
  $filter_value:one value of the filter,defult all value :\Toplan\FilterManager\FilterManager::ALL.
+ 
  $multi:the filter is support multi value?false or true,default false.
+ 
  $LinkageRemoveFilters：linkage remove the other filter,default null.
+ 
  $blackList:temporary blacklist ,default null.
+ 
  exp:
  ```html
    <li class="item all {{FilterManager::isActive('gender',\Toplan\FilterManager\FilterManager::ALL,'active','')}}">
