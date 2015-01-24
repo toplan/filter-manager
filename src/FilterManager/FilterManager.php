@@ -52,7 +52,7 @@ class FilterManager{
      *
      * @return $this
      */
-    public function setBootUrl($baseUrl){
+    public function setBaseUrl($baseUrl){
         $this->baseUrl->$baseUrl;
         return $this;
     }
