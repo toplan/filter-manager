@@ -1,15 +1,15 @@
 # FilterManage for Laravel
 Filter manager package for product list,elegant generate url.
-(产品列表筛选管理器，让你优雅的获得筛选器链)
+(产品列表筛选管理器，让你优雅的获得筛选器链接)
 
 # Installation
 
 ```php
 {
   "require": {
-		"laravel/framework": "4.2.*",
-    "toplan/filter-manager": "dev-master"
-	}
+    // ...
+    "toplan/filter-manager": "dev-master",
+   }
 }
 ```
 
@@ -30,7 +30,7 @@ Find the aliases key in app/config/app.php.
         // ...
         'FilterManager' => 'Toplan\FilterManager\Facades\FilterManager',
     )
-``
+```
 
 # Examper
- You can find Most of the usage in the demo_temp_for_laravel.balde.php
+ You can find most of the usage in the this file->demo_temp_for_laravel.balde.php
