@@ -1,7 +1,5 @@
 # FilterManager for Laravel
-Filter manager package for product list,and let`s elegant generate url.
-
-产品列表筛选管理器，让你优雅的获得筛选器链接。
+Filter manager package for product list,let`s elegant generate filter url.
 
 # Installation
 
@@ -86,14 +84,14 @@ Find the aliases key in app/config/app.php.
  
  exp:
  ```html
-   <li class="item all {{FilterManager::isActive('gender',\Toplan\FilterManager\FilterManager::ALL,'active','')}}">
-        <a href="{{FilterManager::url('gender',\Toplan\FilterManager\FilterManager::ALL)}}">All</a>
-    </li>
-   <li class="item @if(FilterManager::isActive('gender','male')) active @endif">
-        <a href="{{FilterManager::url('gender','male')}}">Male</a>
-    </li>
-    <li class="item @if(FilterManager::isActive('gender','female')) active @endif">
-        <a href="{{FilterManager::url('gender','female')}}">Female</a>
-    </li>
+  <li class="item all {{FilterManager::isActive('gender',\Toplan\FilterManager\FilterManager::ALL,'active','')}}">
+    <a href="{{FilterManager::url('gender',\Toplan\FilterManager\FilterManager::ALL)}}">All</a>
+  </li>
+  <li class="item @if(FilterManager::isActive('gender','male')) active @endif">
+    <a href="{{FilterManager::url('gender','male')}}">Male</a>
+  </li>
+  <li class="item @if(FilterManager::isActive('gender','female')) active @endif">
+    <a href="{{FilterManager::url('gender','female')}}">Female</a>
+  </li>
  ```
  
