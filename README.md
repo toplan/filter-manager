@@ -33,9 +33,7 @@ Find the aliases key in app/config/app.php.
 ```
 
 # Instruction & Init
- Filter manager already importing filters(request data) by Service Provider.
- So,make sure your request params submited by get or post method,
- Import request params(filters data) code in service provider:
+ Filter manager has imported filter (request) data service provider. So,make sure your request params was submited by get or  post method. Code in service provider:
  ```php
     $this->app['FilterManager'] = $this->app->share(function(){
                 return FilterManager::create(\Input::all())->setBlackList(['page']);
@@ -48,15 +46,22 @@ Find the aliases key in app/config/app.php.
  ```php
     FilterManager::create($filters,$baseUrl,$blackList);
  ```
- $filters:this is filters data ,required,exp:['gender'=>'male','city'=>'beijing']
- $baseUrl:default null.
- $blackList:this is blacklist for filtrs,default null,exp:['pageindex'].
+ $filters: this is filters data ,required,exp:['gender'=>'male','city'=>'beijing']
+ $baseUrl: default: array().
+ $blackList:this is blacklist for filtrs,default: array(),exp:['pageindex'].
  
  * add a Filter
  ```php
     FilterManager::addFilter($filter_name,$filter_value)
     FilterManager::addFilter('gender','male');
  ```
+ 
+ * set black list for filter
+ ### setBlackList($filter_name_array)
+ ```php
+  FilterManager::setBlackList(['page']);
+ ```
+ 
  * remove a filter
  ### removeFilter($filter_name)
  ```php
@@ -79,15 +84,15 @@ Find the aliases key in app/config/app.php.
  ```php
     FilterManager::url($filter_name,$filter_value,$multi,$LinkageRemoveFilters,$blackList)
  ```
- $filter_name:filter name,required.
+ $filter_name: filter name,required.
  
- $filter_value:one value of the filter,defult all value :\Toplan\FilterManager\FilterManager::ALL.
+ $filter_value: one value of the filter, defult:\Toplan\FilterManager\FilterManager::ALL.
  
- $multi:the filter is support multi value?false or true,default false.
+ $multi: whether to support multiple? false or true, default: false.
  
- $LinkageRemoveFilters：linkage remove the other filter,default null.
+ $LinkageRemoveFilters：linkage remove the other filter, default: array().
  
- $blackList:temporary blacklist ,default null.
+ $blackList: temporary blacklist, default: array().
  
  exp:
  ```html
