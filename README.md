@@ -43,7 +43,7 @@ Find the aliases key in app/config/app.php.
  You can find most of the usage in the this file->demo_temp_for_laravel.balde.php
  
  * create a instance of FilterManager.
- ### FilterManager::create($filters,$baseUrl,$blackList);
+ ### create($filters,$baseUrl,$blackList);
  
  $filters: this is filters data ,required,exp:['gender'=>'male','city'=>'beijing']
  
