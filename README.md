@@ -39,7 +39,7 @@ Find the aliases key in app/config/app.php.
                 return FilterManager::create(\Input::all())->setBlackList(['page']);
             });
  ```
-# Commonly used method： 
+# Commonly used method 
  You can find most of the usage in the this file->demo_temp_for_laravel.balde.php
  
  * create a instance of FilterManager.
@@ -51,23 +51,12 @@ Find the aliases key in app/config/app.php.
  
  $blackList:this is blacklist for filtrs,default: array(),exp:['pageindex'].
  
- * add a Filter
- ### addFilter($filter_name,$filter_value)
- ```php
-    FilterManager::addFilter('gender','male');
- ```
- 
  * set black list for filter
  ### setBlackList($filter_name_array)
  ```php
   FilterManager::setBlackList(['page']);
  ```
- 
- * remove a filter
- ### removeFilter($filter_name)
- ```php
-    FilterManager::removeFilter('gender');
- ```
+
  * has filter,return value or false
   ### has($filter_name)
  ```php
@@ -81,7 +70,7 @@ Find the aliases key in app/config/app.php.
     FilterManager::isActive('gender','male','active','not active');#this will return 'active' or 'not active';
  ```
  
- * get url(one filter has some value,and every value has a url)
+ * get url(one filter has some values,and every value has url)
  ### url($filter_name,$filter_value,$multi,$LinkageRemoveFilters,$blackList)
 
  $filter_name: filter name,required.
