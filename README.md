@@ -1,6 +1,7 @@
-# FilterManage for Laravel
-Filter manager package for product list,elegant generate url.
-(产品列表筛选管理器，让你优雅的获得筛选器链接)
+# FilterManager for Laravel
+Filter manager package for product list,and let`s elegant generate url.
+
+产品列表筛选管理器，让你优雅的获得筛选器链接。
 
 # Installation
 
@@ -47,9 +48,9 @@ Find the aliases key in app/config/app.php.
  
  $filters: this is filters data ,required,exp:['gender'=>'male','city'=>'beijing']
  
- $baseUrl: default: array().
+ $baseUrl: default=array().
  
- $blackList:this is blacklist for filtrs,default: array(),exp:['pageindex'].
+ $blackList: this is blacklist for filtrs,default=array(),exp:['pageindex'].
  
  * set black list for filter
  ### setBlackList($filter_name_array)
@@ -75,13 +76,13 @@ Find the aliases key in app/config/app.php.
 
  $filter_name: filter name,required.
  
- $filter_value: one value of the filter, defult:\Toplan\FilterManager\FilterManager::ALL.
+ $filter_value: one value of the filter, defult=\Toplan\FilterManager\FilterManager::ALL.
  
- $multi: whether to support multiple? false or true, default: false.
+ $multi: whether to support multiple? false or true, default=false.
  
- $LinkageRemoveFilters：linkage remove the other filter, default: array().
+ $LinkageRemoveFilters：linkage remove the other filter, default=array().
  
- $blackList: temporary blacklist, default: array().
+ $blackList: temporary blacklist, default=array().
  
  exp:
  ```html
