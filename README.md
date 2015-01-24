@@ -44,7 +44,7 @@ Find the aliases key in app/config/app.php.
 # Commonly used method： 
  You can find most of the usage in the this file->demo_temp_for_laravel.balde.php
  
- *create a instance of FilterManager.
+ * create a instance of FilterManager.
  ```php
     FilterManager::create($filters,$baseUrl,$blackList);
  ```
@@ -52,30 +52,30 @@ Find the aliases key in app/config/app.php.
  $baseUrl:default null.
  $blackList:this is blacklist for filtrs,default null,exp:['pageindex'].
  
- *add a Filter
+ * add a Filter
  ```php
     FilterManager::addFilter($filter_name,$filter_value)
     FilterManager::addFilter('gender','male');
  ```
- *remove a filter
-  ###removeFilter($filter_name)
+ * remove a filter
+ ### removeFilter($filter_name)
  ```php
     FilterManager::removeFilter('gender');
  ```
- *has filter,return value or false
-  ###has($filter_name)
+ * has filter,return value or false
+  ### has($filter_name)
  ```php
     FilterManager::has('gender');
  ```
  
- *is active
- ###isActive($filter_name)
+ * is active
+ ### isActive($filter_name)
  ```php
     FilterManager::isActive('gender','male');#this will return ture or false;
     FilterManager::isActive('gender','male','active','not active');#this will return 'active' or 'not active';
  ```
  
- *get url(one filter has some value,and every value has a url)
+ * get url(one filter has some value,and every value has a url)
  ```php
     FilterManager::url($filter_name,$filter_value,$multi,$LinkageRemoveFilters,$blackList)
  ```
