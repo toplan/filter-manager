@@ -63,7 +63,7 @@ Find the aliases key in app/config/app.php.
  * set black list for filter
  ### setBlackList($filter_name_array)
  ```php
-  FilterManager::setBlackList(['page']);
+  FilterManager::setBlackList(['page','pageindex']);
  ```
 
  * has filter,return value or false
@@ -79,8 +79,11 @@ Find the aliases key in app/config/app.php.
     FilterManager::isActive('gender','male','active','not active');#this will return 'active' or 'not active';
  ```
  
- * get url(one filter has some values,and every value has url)
+ * get url
+ 
  ### url($filter_name,$filter_value,$multi,$LinkageRemoveFilters,$blackList)
+
+ One filter has some values,and every value has a url,this mothod return a full url string.
 
  $filter_name: filter name,required.
  
@@ -94,10 +97,12 @@ Find the aliases key in app/config/app.php.
  
  ```php
     FilterManager::url('gender',\Toplan\FilterManager\FilterManager::ALL);//without gender
+    
     FilterManager::url('gender','male',false);//sigle gender,gender equal 'male'
+    
     FilterManager::url('cities','beijing',true);#multiple cities,include 'beijing' or remove 'beijing'
+    
     //One province has many cities,If you remove the 'province tag',you should linkage remove the selected cities
-    //you can set $LinkageRemoveFilters 
     FilterManager::url('province','beijing',false,['cities']);//linkage remove selected cities
 ``` 
  
