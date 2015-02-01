@@ -16,6 +16,8 @@ Filter manager package for product list,let`s elegant generate filter url.
 
 To use the FilterManager Service Provider, you must register the provider when bootstrapping your Laravel application. There are essentially two ways to do this.
 
+1. The preparatory work 
+
 Find the providers key in app/config/app.php and register the HTMLPurifier Service Provider.
 ```php
     'providers' => array(
@@ -31,13 +33,21 @@ Find the aliases key in app/config/app.php.
     )
 ```
 
-# Instruction
- Filter manager has imported filters (request data) by service provider. So,make sure your request params was submited by get or post method. Code in service provider:
- ```php
-    $this->app['FilterManager'] = $this->app->share(function(){
-                return FilterManager::create(\Input::all())->setBlackList(['page']);
-            });
- ```
+2. simple usage:
+
+```html
+<!-- example -->
+<li class="item all {{FilterManager::isActive('gender',\Toplan\FilterManager\FilterManager::ALL,'active','')}}">
+  <a href="{{FilterManager::url('gender',\Toplan\FilterManager\FilterManager::ALL)}}">All</a>
+</li>
+<li class="item @if(FilterManager::isActive('gender','male')) active @endif">
+  <a href="{{FilterManager::url('gender','male')}}">Male</a>
+</li>
+<li class="item @if(FilterManager::isActive('gender','female')) active @endif">
+  <a href="{{FilterManager::url('gender','female')}}">Female</a>
+</li>
+```
+
 # Commonly used method 
  You can find most of the usage in the this file->demo_temp_for_laravel.balde.php
  
@@ -82,16 +92,12 @@ Find the aliases key in app/config/app.php.
  
  $blackList: temporary blacklist, default=array().
  
- exp:
- ```html
-  <li class="item all {{FilterManager::isActive('gender',\Toplan\FilterManager\FilterManager::ALL,'active','')}}">
-    <a href="{{FilterManager::url('gender',\Toplan\FilterManager\FilterManager::ALL)}}">All</a>
-  </li>
-  <li class="item @if(FilterManager::isActive('gender','male')) active @endif">
-    <a href="{{FilterManager::url('gender','male')}}">Male</a>
-  </li>
-  <li class="item @if(FilterManager::isActive('gender','female')) active @endif">
-    <a href="{{FilterManager::url('gender','female')}}">Female</a>
-  </li>
- ```
+ ```php
+    FilterManager::url('gender',\Toplan\FilterManager\FilterManager::ALL);//without gender
+    FilterManager::url('gender','male',false);//sigle gender,gender equal 'male'
+    FilterManager::url('cities','beijing',true);#multiple cities,include 'beijing' or remove 'beijing'
+    //One province has many cities,If you remove the 'province tag',you should linkage remove the selected cities
+    //you can set $LinkageRemoveFilters 
+    FilterManager::url('province','beijing',false,['cities']);//linkage remove selected cities
+``` 
  
