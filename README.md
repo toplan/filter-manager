@@ -33,7 +33,7 @@ Find the aliases key in app/config/app.php.
     )
 ```
 
-### 2 simple usage:
+### 2 Enjoy it
 
 ```html
 <!-- example -->
@@ -63,7 +63,7 @@ Find the aliases key in app/config/app.php.
  * set black list for filter
  ### setBlackList($filter_name_array)
  ```php
-  FilterManager::setBlackList(['page','pageindex']);
+    FilterManager::setBlackList(['page','pageindex']);
  ```
 
  * has filter,return value or false
