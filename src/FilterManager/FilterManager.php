@@ -121,7 +121,7 @@ class FilterManager{
      */
     public function isActive($name = '',$value = FilterManager::ALL,$trueReturn = true,$falseReturn = false){
         $current_filters = $this->filters;
-        if(!$name || !$value)
+        if(!$name)
             return false;
         if(!$current_filters || !isset($current_filters["$name"])){
             if($value == FilterManager::ALL)
@@ -155,7 +155,7 @@ class FilterManager{
         $filters = [];
         $current_filters = $this->filters;
 
-        if(!$name || !$value)
+        if(!$name)
             return $this->baseUrl;
 
         if(!$current_filters || !count($current_filters))
