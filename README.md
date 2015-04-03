@@ -1,8 +1,7 @@
 # FilterManager for Laravel
 Filter manager package for product list,let`s elegant generate filter url.
 
-![GitHub Logo](fm-demo.png)
-Format: ![Alt Text](url)
+![demo image](fm-demo.png)
 
 # Installation
 
