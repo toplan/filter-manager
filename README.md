@@ -1,6 +1,9 @@
 # FilterManager for Laravel
 Filter manager package for product list,let`s elegant generate filter url.
 
+![GitHub Logo](fm-demo.png)
+Format: ![Alt Text](url)
+
 # Installation
 
 ```php
@@ -16,7 +19,7 @@ Filter manager package for product list,let`s elegant generate filter url.
 
 To use the FilterManager Service Provider, you must register the provider when bootstrapping your Laravel application. There are essentially two ways to do this.
 
-### 1 The preparatory work 
+### 1. The preparatory work
 
 Find the providers key in app/config/app.php and register the HTMLPurifier Service Provider.
 ```php
@@ -33,7 +36,7 @@ Find the aliases key in app/config/app.php.
     )
 ```
 
-### 2 Enjoy it
+### 2. Enjoy it
 
 ```html
 <!-- example -->

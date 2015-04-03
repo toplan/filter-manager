@@ -190,7 +190,7 @@ class FilterManager{
         }
         $params = [];
         foreach($filters as $key => $filter){
-            if($filter) $params[] = "$key=$filter";
+            if ($filter = urlencode(trim($filter))) $params[] = "$key=$filter";
         }
         return "$this->baseUrl?" . implode('&',$params);
     }
