@@ -1,4 +1,4 @@
-# FilterManager for Laravel
+# FilterManager for Laravel 5
 Filter manager package for product list,let`s elegant generate filter url.
 
 ![demo image](fm-demo.png)
