@@ -20,14 +20,14 @@ To use the FilterManager Service Provider, you must register the provider when b
 
 ### 1. The preparatory work
 
-Find the providers key in app/config/app.php and register the HTMLPurifier Service Provider.
+Find the providers key in config/app.php and register the HTMLPurifier Service Provider.
 ```php
     'providers' => array(
         // ... 
         'Toplan\FilterManager\FilterManagerServiceProvider',
     )
 ```    
-Find the aliases key in app/config/app.php.
+Find the aliases key in config/app.php.
 ```php
     'aliases' => array(
         // ...
@@ -77,7 +77,7 @@ Find the aliases key in app/config/app.php.
  * is active
  ### isActive($filter_name)
  ```php
-    FilterManager::isActive('gender','male');#this will return ture or false;
+    FilterManager::isActive('gender','male');#this will return true or false;
     FilterManager::isActive('gender','male','active','not active');#this will return 'active' or 'not active';
  ```
  
