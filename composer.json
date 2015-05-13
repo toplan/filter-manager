@@ -6,12 +6,12 @@
     "authors": [
         {
             "name": "toplan",
-            "email": "1083439280@qq.com"
+            "email": "toplan710@gmail.com"
         }
     ],
     "require": {
         "php": ">=5.4.0",
-        "illuminate/support": "4.2.*"
+        "illuminate/support": "5.0.*"
     },
     "autoload": {
         "classmap": [
