@@ -1,7 +1,10 @@
 # FilterManager for Laravel 5
 Filter manager package for product list,let`s elegant generate filter url.
+This page used FilterManager: [kiteme.cn/list](kiteme.cn/list)
 
 ![demo image](fm-demo.png)
+
+![demo image](fm-demo2.png)
 
 # Installation
 
