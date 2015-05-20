@@ -2,6 +2,8 @@
 Filter manager package for product list,let`s elegant generate filter url.
 This page used FilterManager: [kiteme.cn/list](http://kiteme.cn/list)
 
+[中文文档](https://github.com/toplan/FilterManager/blob/master/README_CN.md)
+
 ![demo image](fm-demo.png)
 
 ![demo image](fm-demo2.png)
@@ -23,7 +25,7 @@ To use the FilterManager Service Provider, you must register the provider when b
 
 ### 1. The preparatory work
 
-Find the providers key in config/app.php and register the HTMLPurifier Service Provider.
+Find the providers key in config/app.php and register the FilterManger Service Provider.
 ```php
     'providers' => array(
         // ... 
@@ -38,7 +40,7 @@ Find the aliases key in config/app.php.
     )
 ```
 
-### 2. Enjoy it
+### 2. then, Just enjoy it
 
 ```html
 <!-- example -->
@@ -54,7 +56,7 @@ Find the aliases key in config/app.php.
 ```
 
 # Commonly used method 
- You can find most of the usage in the this file->demo_temp_for_laravel.balde.php
+ You can find most of the usage in the this file: demo_temp_for_laravel.balde.php
  
  * create a instance of FilterManager.
  ### create($filters,$baseUrl,$blackList);
@@ -78,7 +80,7 @@ Find the aliases key in config/app.php.
  ```
  
  * is active
- ### isActive($filter_name)
+ ### isActive($filter_name, $filter_value, $trueReturn, $falseReturn)
  ```php
     FilterManager::isActive('gender','male');#this will return true or false;
     FilterManager::isActive('gender','male','active','not active');#this will return 'active' or 'not active';
@@ -90,9 +92,9 @@ Find the aliases key in config/app.php.
 
  One filter has some values,and every value has a url,this mothod return a full url string.
 
- $filter_name: filter name,required.
+ $filter_name: param name, required.
  
- $filter_value: one value of the filter, defult=\Toplan\FilterManager\FilterManager::ALL.
+ $filter_value: param value, default value:\Toplan\FilterManager\FilterManager::ALL.
  
  $multi: whether to support multiple? false or true, default=false.
  
@@ -101,13 +103,13 @@ Find the aliases key in config/app.php.
  $blackList: temporary blacklist, default=array().
  
  ```php
-    FilterManager::url('gender',\Toplan\FilterManager\FilterManager::ALL);//without gender
+    FilterManager::url('gender',\Toplan\FilterManager\FilterManager::ALL);//without gender param
     
-    FilterManager::url('gender','male',false);//sigle gender,gender equal 'male'
-    
-    FilterManager::url('cities','beijing',true);#multiple cities,include 'beijing' or remove 'beijing'
+    FilterManager::url('gender','male',false);#single value
+
+    FilterManager::url('cities','beijing',true);#multiple values
     
     //One province has many cities,If you remove the 'province tag',you should linkage remove the selected cities
-    FilterManager::url('province','beijing',false,['cities']);//linkage remove selected cities
+    FilterManager::url('province','chengdu',false,['cities']);//linkage remove selected cities
 ``` 
  
