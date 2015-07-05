@@ -26,8 +26,10 @@
 请在 config/app.php 文件中找到名为 providers 的key ，然后为FilterManager的服务提供器。
 ```php
     'providers' => array(
-        // ... 
+        //5.0.*
         'Toplan\FilterManager\FilterManagerServiceProvider',
+        //5.1.*
+        Toplan\FilterManager\FilterManagerServiceProvider::class,
     )
 ```    
 然后请在 config/app.php 文件中找到名为 aliases 的key ， 然后为FilterManger添加别名。
