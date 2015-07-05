@@ -35,8 +35,10 @@
 然后请在 config/app.php 文件中找到名为 aliases 的key ， 然后为FilterManger添加别名。
 ```php
     'aliases' => array(
-        // ...
+        //5.0.*
         'FilterManager' => 'Toplan\FilterManager\Facades\FilterManager',
+        //5.1.*
+        'FilterManager' => Toplan\FilterManager\Facades\FilterManager::class,
     )
 ```
 
