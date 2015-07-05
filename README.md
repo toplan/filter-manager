@@ -28,15 +28,19 @@ To use the FilterManager Service Provider, you must register the provider when b
 Find the providers key in config/app.php and register the FilterManger Service Provider.
 ```php
     'providers' => array(
-        // ... 
+        //5.0.*
         'Toplan\FilterManager\FilterManagerServiceProvider',
+        //5.1.*
+        Toplan\FilterManager\FilterManagerServiceProvider::class,
     )
 ```    
 Find the aliases key in config/app.php.
 ```php
     'aliases' => array(
-        // ...
+        //5.0.*
         'FilterManager' => 'Toplan\FilterManager\Facades\FilterManager',
+        //5.1.*
+        'FilterManager' => Toplan\FilterManager\Facades\FilterManager::class,
     )
 ```
 
