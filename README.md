@@ -1,8 +1,8 @@
-# FilterManager for Laravel 5
-Filter manager package for product list,let`s elegant generate filter url.
+# FilterManager
+filter manager package for product list,let`s elegant generate filter url.
 This page used FilterManager: [kiteme.cn/list](http://kiteme.cn/list)
 
-[中文文档](https://github.com/toplan/FilterManager/blob/master/README_CN.md)
+**[中文文档](https://github.com/toplan/FilterManager/blob/master/README_CN.md)**
 
 ![demo image](fm-demo.png)
 
@@ -25,6 +25,9 @@ To use the FilterManager Service Provider, you must register the provider when b
 
 ### 1. The preparatory work
 
+**Used in laravel**
+create instance by laravel IOC and Provider.
+
 Find the providers key in config/app.php and register the FilterManger Service Provider.
 ```php
     'providers' => array(
@@ -44,8 +47,21 @@ Find the aliases key in config/app.php.
     )
 ```
 
+**Doesn`t use in laravel**
+create instance by yourself.
+
+```php
+    use Toplan\FilterManager\FilterManager as FilterManager;
+    $paramsArray = [
+        'paramName' => 'value',
+        ...
+    ]
+    $fm = FilterManager::create($paramsArray)->setBlackList(['page']);
+```
+
 ### 2. then, Just enjoy it
 
+by blade template
 ```html
 <!-- example -->
 <li class="item all {{FilterManager::isActive('gender',\Toplan\FilterManager\FilterManager::ALL,'active','')}}">
@@ -56,6 +72,13 @@ Find the aliases key in config/app.php.
 </li>
 <li class="item @if(FilterManager::isActive('gender','female')) active @endif">
   <a href="{{FilterManager::url('gender','female')}}">Female</a>
+</li>
+```
+
+or by php tag
+```html
+<li class="item <?php echo $fm->isActive('gender', 'female', 'active', '') ?>">
+  <a href="<?php echo $fm->url('gender','female') ?>">Female</a>
 </li>
 ```
 
