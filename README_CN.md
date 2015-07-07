@@ -93,7 +93,12 @@ create($filters,$baseUrl,$blackList);
 ### 2. 设置筛选条件黑名单
  可以在每次生成uri/url的时候过滤掉你不想要的筛选条件/参数(比如分页参数等)
 ```php
-//laravel中示例
+setBlackList($blackList);
+```
+
+示例：
+```php
+//laravel中
 FilterManager::setBlackList(['page','pageindex']);
 //手动创建的实例$fm
 $fm->setBlackList(['page','pageindex']);
@@ -102,7 +107,14 @@ $fm->setBlackList(['page','pageindex']);
 ### 3. 是否有指定筛选条件
  如果有指定条件，会返回该过滤添加的值，否则返回false
 ```php
+has($filter_name);
+```
+示例：
+```php
+//laravel中
 FilterManager::has('gender');
+//手动创建的实例$fm
+$fm->has('gender');
 ```
 
 ### 4. 指定的筛选条件是否包含指点值
@@ -112,7 +124,7 @@ isActive($filter_name, $filter_value, $trueReturn, $falseReturn)
 
 示例：
 ```php
-//laravel中示例
+//laravel中
 FilterManager::isActive('gender','male');#将会返回true 或 false;
 FilterManager::isActive('gender','male','active','not active');#将会返回 'active' 或 'not active';
 //手动创建的实例$fm
@@ -121,7 +133,7 @@ $fm->isActive('gender','male');
 
 ### 5. 生成 uri/url
 
-```
+```php
 url($filter_name,$filter_value,$multi,$LinkageRemoveFilters,$blackList)
 ```
 

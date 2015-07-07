@@ -21,12 +21,11 @@ This page used FilterManager: [kiteme.cn/list](http://kiteme.cn/list)
 
 # Usage
 
-To use the FilterManager Service Provider, you must register the provider when bootstrapping your Laravel application. There are essentially two ways to do this.
-
 ### 1. The preparatory work
 
 **Used in laravel**
-create instance by laravel IOC and Provider.
+
+To use the FilterManager Service Provider, you must register the provider when bootstrapping your Laravel application. There are essentially two ways to do this.
 
 Find the providers key in config/app.php and register the FilterManger Service Provider.
 ```php
@@ -48,6 +47,7 @@ Find the aliases key in config/app.php.
 ```
 
 **Doesn`t use in laravel**
+
 create instance by yourself.
 
 ```php
@@ -85,7 +85,7 @@ or by php tag
 # Commonly used method 
  You can find most of the usage in the this file: demo_temp_for_laravel.balde.php
  
- ### 1. create a instance of FilterManager.
+ ### 1. create a instance of FilterManager
  ```php
  create($filters,$baseUrl,$blackList);
  ```
