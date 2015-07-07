@@ -82,7 +82,8 @@ or by php tag
 </li>
 ```
 
-# Commonly used method 
+# Commonly used method
+
  You can find most of the usage in the this file: demo_temp_for_laravel.balde.php
  
  ### 1. create a instance of FilterManager

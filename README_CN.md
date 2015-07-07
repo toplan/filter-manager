@@ -19,12 +19,11 @@
 
 # 打开姿势
 
-请先通过第一步(准备工作)完成服务提供器的注册。
-
 ### 1. 准备工作
 
 **在laravel使用**
-通过laravel的IOC容器和Provider提供器自动提供FilterManager实例：
+
+通过laravel的IOC容器和服务提供器自动提供FilterManager实例：
 
 *请在 config/app.php 文件中找到名为 providers 的key ，然后为FilterManager的服务提供器。*
 ```php
@@ -46,6 +45,7 @@
 ```
 
 **自助创建实例(非laravel框架)**
+
 自己手动创建FilterManager实例$fm：
 ```php
     use Toplan\FilterManager\FilterManager as FilterManager;
