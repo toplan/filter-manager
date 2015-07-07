@@ -46,7 +46,7 @@
 ```
 
 **自助创建实例(非laravel框架)**
-自己手动创建FilterManager实例：
+自己手动创建FilterManager实例$fm：
 ```php
     use Toplan\FilterManager\FilterManager as FilterManager;
     $paramsArray = [
@@ -57,6 +57,7 @@
 ```
 
 ### 2. Then, just enjoy it!
+**通过Blade模板使用**
 ```html
 <!-- example -->
 <li class="item @if(FilterManager::isActive('gender','male')) active @endif">
@@ -66,6 +67,14 @@
   <a href="{{FilterManager::url('gender','female')}}"> 女 </a>
 </li>
 ```
+
+**通过php标签使用**
+```html
+<li class="item <?php echo $fm->isActive('gender', 'female', 'active', '') ?>">
+  <a href="<?php echo $fm->url('gender','female') ?>">Female</a>
+</li>
+```
+
 更多的详细用法参见: demo_temp_for_laravel.blade.php
 
 ## 常用方法

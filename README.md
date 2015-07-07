@@ -85,51 +85,73 @@ or by php tag
 # Commonly used method 
  You can find most of the usage in the this file: demo_temp_for_laravel.balde.php
  
- * create a instance of FilterManager.
- ### create($filters,$baseUrl,$blackList);
- 
- $filters: this is filters data ,required,exp:['gender'=>'male','city'=>'beijing']
- 
- $baseUrl: default=array().
- 
- $blackList: this is blacklist for filtrs,default=array(),exp:['pageindex'].
- 
- * set black list for filter
- ### setBlackList($filter_name_array)
+ ### 1. create a instance of FilterManager.
  ```php
+ create($filters,$baseUrl,$blackList);
+ ```
+ 
+ - `$filters`: this is filters data ,required,exp:['gender'=>'male','city'=>'beijing']
+ 
+ - `$baseUrl`: default=array().
+ 
+ - `$blackList`: this is blacklist for filtrs,default=array(),exp:['pageindex'].
+ 
+ ### 2. set black list for filter
+ ```php
+ setBlackList($filter_name_array)
+ ```
+ example:
+ ```php
+    //in laravel
     FilterManager::setBlackList(['page','pageindex']);
+    //doesn`t in laravel
+    $fm->setBlackList(['page','pageindex']);
  ```
 
- * has filter,return value or false
-  ### has($filter_name)
+ ### 3. has filter,return value or false
  ```php
+ has($filter_name)
+ ```
+ example:
+ ```php
+    //in laravel
     FilterManager::has('gender');
+    //doesn`t in laravel
+    $fm->has('gender');
  ```
  
- * is active
- ### isActive($filter_name, $filter_value, $trueReturn, $falseReturn)
+ ### 4. is active
  ```php
+ isActive($filter_name, $filter_value, $trueReturn, $falseReturn)
+ ```
+ example:
+ ```php
+    //in laravel
     FilterManager::isActive('gender','male');#this will return true or false;
     FilterManager::isActive('gender','male','active','not active');#this will return 'active' or 'not active';
  ```
  
- * get url
- 
- ### url($filter_name,$filter_value,$multi,$LinkageRemoveFilters,$blackList)
+ ### 4. get url
+
+ ```php
+ url($filter_name,$filter_value,$multi,$LinkageRemoveFilters,$blackList)
+ ```
 
  One filter has some values,and every value has a url,this mothod return a full url string.
 
- $filter_name: param name, required.
+ - `$filter_name`: param name, required.
  
- $filter_value: param value, default value:\Toplan\FilterManager\FilterManager::ALL.
+ - `$filter_value`: param value, default value:\Toplan\FilterManager\FilterManager::ALL.
  
- $multi: whether to support multiple? false or true, default=false.
+ - `$multi`: whether to support multiple? false or true, default=false.
  
- $LinkageRemoveFilters：linkage remove the other filter, default=array().
+ - `$LinkageRemoveFilters`：linkage remove the other filter, default=array().
  
- $blackList: temporary blacklist, default=array().
- 
+ - `$blackList`: temporary blacklist, default=array().
+
+ example:
  ```php
+    //in laravel
     FilterManager::url('gender',\Toplan\FilterManager\FilterManager::ALL);//without gender param
     
     FilterManager::url('gender','male',false);#single value
