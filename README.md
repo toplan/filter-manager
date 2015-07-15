@@ -1,5 +1,6 @@
 # FilterManager
-filter manager package for product list,let`s elegant generate filter url.
+
+filter manager package for product list filter,let`s elegant generate filter url.
 This page used FilterManager: [kiteme.cn/list](http://kiteme.cn/list)
 
 **[中文文档](https://github.com/toplan/FilterManager/blob/master/README_CN.md)**
@@ -84,9 +85,7 @@ or by php tag
 
 # Commonly used method
 
- You can find most of the usage in the this file: demo_temp_for_laravel.balde.php
- 
- ### 1. create a instance of FilterManager
+### 1. create a instance
  ```php
  create($filters,$baseUrl,$blackList);
  ```
@@ -97,7 +96,7 @@ or by php tag
  
  - `$blackList`: this is blacklist for filtrs,default=array(),exp:['pageindex'].
  
- ### 2. set black list for filter
+### 2. set black list for filter
  ```php
  setBlackList($filter_name_array)
  ```
@@ -109,7 +108,7 @@ or by php tag
     $fm->setBlackList(['page','pageindex']);
  ```
 
- ### 3. has filter,return value or false
+### 3. has filter,return value or false
  ```php
  has($filter_name)
  ```
@@ -121,7 +120,7 @@ or by php tag
     $fm->has('gender');
  ```
  
- ### 4. is active
+### 4. is active
  ```php
  isActive($filter_name, $filter_value, $trueReturn, $falseReturn)
  ```
@@ -132,7 +131,7 @@ or by php tag
     FilterManager::isActive('gender','male','active','not active');#this will return 'active' or 'not active';
  ```
  
- ### 4. get url
+### 5. get url
 
  ```php
  url($filter_name,$filter_value,$multi,$LinkageRemoveFilters,$blackList)
@@ -162,4 +161,3 @@ or by php tag
     //One province has many cities,If you remove the 'province tag',you should linkage remove the selected cities
     FilterManager::url('province','chengdu',false,['cities']);//linkage remove selected cities
 ``` 
- 
