@@ -90,11 +90,13 @@ class FilterManager
 
     /**
      * add filter
+     *
      * @param string $name
      * @param string $value
      *
-     * @return $this
      * @throws FilterManagerException
+     *
+     * @return $this
      */
     public function addFilter($name, $value)
     {
@@ -124,11 +126,11 @@ class FilterManager
 
     /**
      * whether has character filter
+     *
      * @param $name
      *
      * @return mixed
      */
-
     public function has($name)
     {
         if (isset($this->filters["$name"])) {
