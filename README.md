@@ -114,11 +114,6 @@ $value = $fm->has('gender');
 $value = FilterManager::has('gender');
 ```
 
-### getFilterValue($filterName)
-
-get filter value.
-
- 
 ### isActive($filterName, $filterValue, $trueReturn, $falseReturn)
 
 example:
