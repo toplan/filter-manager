@@ -50,16 +50,34 @@
 
 ###2. Then, just enjoy it!
 
-在模板中使用：
+在模板中使用`$fm`:
 ```html
 <!-- example -->
-<li class="item @if(FilterManager::isActive('gender','male')) active @endif">
-  <a href="{{FilterManager::url('gender','male')}}"> 男 </a>
+<li class="item all {{$fm->isActive('gender', FM_SELECT_ALL, 'active', '')}}">
+  <a href="{{$fm->url('gender',\Toplan\FilterManager\FilterManager::ALL)}}">All</a>
 </li>
-<li class="item @if(FilterManager::isActive('gender','female')) active @endif">
-  <a href="{{FilterManager::url('gender','female')}}"> 女 </a>
+<li class="item @if($fm->isActive('gender', 'male')) active @endif">
+  <a href="{{$fm->url('gender','male')}}">Male</a>
+</li>
+<li class="item @if($fm->isActive('gender', 'female')) active @endif">
+  <a href="{{$fm->url('gender','female')}}">Female</a>
 </li>
 ```
+
+在模板中使laravel facade `FilterManger`：
+```html
+<!-- example -->
+<li class="item all {{FilterManager::isActive('gender', FM_SELECT_ALL, 'active', '')}}">
+  <a href="{{FilterManager::url('gender',\Toplan\FilterManager\FilterManager::ALL)}}">All</a>
+</li>
+<li class="item @if(FilterManager::isActive('gender', 'male')) active @endif">
+  <a href="{{FilterManager::url('gender', 'male')}}">Male</a>
+</li>
+<li class="item @if(FilterManager::isActive('gender','female')) active @endif">
+  <a href="{{FilterManager::url('gender','female')}}">Female</a>
+</li>
+```
+
 更多的详细用法参见: demo_temp_for_laravel.blade.php
 
 # 常用方法

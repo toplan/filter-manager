@@ -56,14 +56,28 @@ Find the aliases key in config/app.php.
 
 ###2. Just enjoy it
 
-used in template
+use value `$fm` in template:
 ```html
 <!-- example -->
-<li class="item all {{FilterManager::isActive('gender',\Toplan\FilterManager\FilterManager::ALL,'active','')}}">
+<li class="item all {{$fm->isActive('gender', FM_SELECT_ALL, 'active', '')}}">
+  <a href="{{$fm->url('gender',\Toplan\FilterManager\FilterManager::ALL)}}">All</a>
+</li>
+<li class="item @if($fm->isActive('gender', 'male')) active @endif">
+  <a href="{{$fm->url('gender','male')}}">Male</a>
+</li>
+<li class="item @if($fm->isActive('gender', 'female')) active @endif">
+  <a href="{{$fm->url('gender','female')}}">Female</a>
+</li>
+```
+
+or use laravel facade value `FilterManager` in template:
+```html
+<!-- example -->
+<li class="item all {{FilterManager::isActive('gender', FM_SELECT_ALL, 'active', '')}}">
   <a href="{{FilterManager::url('gender',\Toplan\FilterManager\FilterManager::ALL)}}">All</a>
 </li>
-<li class="item @if(FilterManager::isActive('gender','male')) active @endif">
-  <a href="{{FilterManager::url('gender','male')}}">Male</a>
+<li class="item @if(FilterManager::isActive('gender', 'male')) active @endif">
+  <a href="{{FilterManager::url('gender', 'male')}}">Male</a>
 </li>
 <li class="item @if(FilterManager::isActive('gender','female')) active @endif">
   <a href="{{FilterManager::url('gender','female')}}">Female</a>
