@@ -1,11 +1,10 @@
 # FilterManager
 
 filter manager package for product list filter,let`s elegant generate filter url.
+
 This page used FilterManager: [kiteme.cn/list](http://kiteme.cn/list)
 
 **[中文文档](https://github.com/toplan/FilterManager/blob/master/README_CN.md)**
-
-![demo image](fm-demo.png)
 
 ![demo image](fm-demo2.png)
 
@@ -22,47 +21,42 @@ This page used FilterManager: [kiteme.cn/list](http://kiteme.cn/list)
 
 # Usage
 
-### 1. The preparatory work
+###1. The preparatory work
 
-**Used in laravel**
+```php
+require 'path/to/vendor/autoload.php';
+use Toplan\FilterManager\FilterManager as FilterManager;
 
-To use the FilterManager Service Provider, you must register the provider when bootstrapping your Laravel application. There are essentially two ways to do this.
+// params
+$paramsArray = [
+    'paramName' => 'value',
+    ...
+]
+// create instance by yourself.
+$fm = FilterManager::create($paramsArray)->setBlackList(['page']);
+```
+
+then, render `$fm` value to your template!
+
+**Used in laravel:**
 
 Find the providers key in config/app.php and register the FilterManger Service Provider.
 ```php
     'providers' => array(
-        //5.0.*
-        'Toplan\FilterManager\FilterManagerServiceProvider',
-        //5.1.*
         Toplan\FilterManager\FilterManagerServiceProvider::class,
     )
 ```    
 Find the aliases key in config/app.php.
 ```php
     'aliases' => array(
-        //5.0.*
-        'FilterManager' => 'Toplan\FilterManager\Facades\FilterManager',
-        //5.1.*
         'FilterManager' => Toplan\FilterManager\Facades\FilterManager::class,
     )
 ```
 
-**Doesn`t use in laravel**
 
-create instance by yourself.
+###2. Just enjoy it
 
-```php
-    use Toplan\FilterManager\FilterManager as FilterManager;
-    $paramsArray = [
-        'paramName' => 'value',
-        ...
-    ]
-    $fm = FilterManager::create($paramsArray)->setBlackList(['page']);
-```
-
-### 2. then, Just enjoy it
-
-by blade template
+used in template
 ```html
 <!-- example -->
 <li class="item all {{FilterManager::isActive('gender',\Toplan\FilterManager\FilterManager::ALL,'active','')}}">
@@ -73,13 +67,6 @@ by blade template
 </li>
 <li class="item @if(FilterManager::isActive('gender','female')) active @endif">
   <a href="{{FilterManager::url('gender','female')}}">Female</a>
-</li>
-```
-
-or by php tag
-```html
-<li class="item <?php echo $fm->isActive('gender', 'female', 'active', '') ?>">
-  <a href="<?php echo $fm->url('gender','female') ?>">Female</a>
 </li>
 ```
 
@@ -102,10 +89,9 @@ or by php tag
  ```
  example:
  ```php
-    //in laravel
-    FilterManager::setBlackList(['page','pageindex']);
-    //doesn`t in laravel
     $fm->setBlackList(['page','pageindex']);
+    //or in laravel
+    FilterManager::setBlackList(['page','pageindex']);
  ```
 
 ### 3. has filter,return value or false
@@ -114,10 +100,9 @@ or by php tag
  ```
  example:
  ```php
-    //in laravel
-    FilterManager::has('gender');
-    //doesn`t in laravel
     $fm->has('gender');
+    //or in laravel
+    FilterManager::has('gender');
  ```
  
 ### 4. is active
