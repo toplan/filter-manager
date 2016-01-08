@@ -20,7 +20,6 @@ class FilterManagerServiceProvider extends ServiceProvider
      */
     public function register()
     {
-        define('FM_SELECT_ALL', FilterManager::ALL);
         $this->app['FilterManager'] = $this->app->share(function () {
                 return FilterManager::create(\Input::all())->setBlackList(['page']);
             });

@@ -104,7 +104,7 @@ FilterManager::setBlackList(['page','pageindex']);
 
 ### has($filter_name)
 
-has filter,return value or false.
+has filter, return value or false.
 
 example:
 ```php

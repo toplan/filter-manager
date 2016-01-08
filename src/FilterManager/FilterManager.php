@@ -7,7 +7,7 @@ namespace Toplan\FilterManager;
  */
 class FilterManager
 {
-    const ALL = 'FilterManager_All';
+    const ALL = 'FilterManager_SelectAll';
 
     /**
      * core data:current filters
@@ -39,6 +39,7 @@ class FilterManager
      */
     public function __construct(array $filters, $baseUrl = '', array $blackList = array())
     {
+        define('FM_SELECT_ALL', self::ALL);
         $this->filters = $filters;
         $this->baseUrl = str_replace('?', '', $baseUrl);
         $this->blackList = $blackList;
@@ -52,7 +53,7 @@ class FilterManager
      * @return FilterManager
      */
 
-    public static function create(array $filters, $baseUrl = '', array $blackList = array())
+    public static function create(array $filters, $baseUrl = '', array $blackList = [])
     {
         $fm = new self($filters, $baseUrl, $blackList);
 
@@ -145,19 +146,19 @@ class FilterManager
      */
     public function isActive($name = '', $value = self::ALL, $trueReturn = true, $falseReturn = false)
     {
-        $current_filters = $this->filters;
+        $currentFilters = $this->filters;
         if (!$name) {
             return false;
         }
-        if (!$current_filters || !isset($current_filters["$name"])) {
+        if (!$currentFilters || !isset($currentFilters["$name"])) {
             if ($value === self::ALL) {
                 return $trueReturn;
             } else {
                 return $falseReturn;
             }
         }
-        $arra = explode(',', $current_filters["$name"]);
-        if (in_array($value, $arra)) {
+        $valueArray = explode(',', $currentFilters["$name"]);
+        if (in_array($value, $valueArray)) {
             return $trueReturn;
         } else {
             return $falseReturn;
@@ -173,51 +174,51 @@ class FilterManager
      * @param bool $multi
      * Whether to support more value filtering,
      * if $value == FilterManager::ALL, this parameter does`t work
-     * @param array $LinkageRemoveFilters
+     * @param array $linkageRemoveFilters
      * Linkage to filter the filter
      * @param array $blackList
      *
      * @return string
      */
 
-    public function url($name = '', $value = self::ALL, $multi = false, array $LinkageRemoveFilters = [], array $blackList = null)
+    public function url($name = '', $value = self::ALL, $multi = false, array $linkageRemoveFilters = [], array $blackList = [])
     {
         $filters = [];
-        $current_filters = $this->filters;
+        $currentFilters = $this->filters;
 
         if (!$name) {
             return $this->baseUrl;
         }
 
-        if (!$current_filters || !count($current_filters)) {
+        if (!$currentFilters || !count($currentFilters)) {
             return  $value !== self::ALL ? "$this->baseUrl?$name=$value" : $this->baseUrl;
         }
 
-        if (!isset($current_filters["$name"]) && $value !== self::ALL) {
-            if ($this->isPass($name, $LinkageRemoveFilters, $blackList)) {
+        if (!isset($currentFilters["$name"]) && $value !== self::ALL) {
+            if ($this->isPass($name, $linkageRemoveFilters, $blackList)) {
                 $filters["$name"] = $value;
             }
         }
 
-        foreach ($current_filters as $filter_name => $filter_value) {
-            if ($this->isPass($filter_name, $LinkageRemoveFilters, $blackList)) {
-                if ($name === "$filter_name") {
+        foreach ($currentFilters as $filterName => $filterValue) {
+            if ($this->isPass($filterName, $linkageRemoveFilters, $blackList)) {
+                if ($name === "$filterName") {
                     if ($value !== self::ALL) {
                         if ($multi) {
-                            $arra = explode(',', $filter_value);
-                            if (in_array($value, $arra)) {
-                                $new_arra = array_diff($arra, [$value]);
-                                $filters["$filter_name"] = implode(',', $new_arra);
+                            $valueArray = explode(',', $filterValue);
+                            if (in_array($value, $valueArray)) {
+                                $newValueArray = array_diff($valueArray, [$value]);
+                                $filters["$filterName"] = implode(',', $newValueArray);
                             } else {
-                                array_push($arra, $value);
-                                $filters["$filter_name"] = implode(',', $arra);
+                                array_push($valueArray, $value);
+                                $filters["$filterName"] = implode(',', $valueArray);
                             }
                         } else {
-                            $filters["$filter_name"] = $value;
+                            $filters["$filterName"] = $value;
                         }
                     }
                 } else {
-                    $filters["$filter_name"] = $filter_value;
+                    $filters["$filterName"] = $filterValue;
                 }
             }
         }
@@ -232,24 +233,24 @@ class FilterManager
     }
 
     /**filter filters
-     * @param       $filter_name
-     * @param array $LinkageRemoveFilters
+     * @param       $filterName
+     * @param array $linkageRemoveFilters
      * @param array $blackList
      *
      * @return bool
      */
 
-    private function isPass($filter_name, array $LinkageRemoveFilters = [], array $blackList = null)
+    protected function isPass($filterName, array $linkageRemoveFilters = [], array $blackList = [])
     {
-        if (count($LinkageRemoveFilters) > 0) {
-            if (in_array($filter_name, $LinkageRemoveFilters)) {
+        if (count($linkageRemoveFilters) > 0) {
+            if (in_array($filterName, $linkageRemoveFilters)) {
                 return false;
             }
         }
-        if (!$blackList || count($blackList) === 0) {
+        if (count($blackList) === 0) {
             $blackList = $this->blackList;
         }
-        if (in_array($filter_name, $blackList)) {
+        if (in_array($filterName, $blackList)) {
             return false;
         }
 
