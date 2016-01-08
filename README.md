@@ -11,7 +11,7 @@ This page used FilterManager: [kiteme.cn/list](http://kiteme.cn/list)
 # Install
 
 ```php
-composer require 'toplan/filter-manager:dev-master'
+composer require 'toplan/filter-manager:~1.0.2'
 ```
 
 # Usage

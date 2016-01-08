@@ -10,7 +10,7 @@
 # 安装
 
 ```php
-composer require 'toplan/filter-manager:dev-master'
+composer require 'toplan/filter-manager:~1.0.2'
 ```
 
 # 打开姿势
