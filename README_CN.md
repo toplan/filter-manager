@@ -89,35 +89,35 @@ $fm = FilterManager::create($paramsArray)->setBlackList(['page']);
 
 获得FilterManager对象。
 
-- `$filters`: 参数数组,例:['gender'=>'male','city'=>'beijing']
-- `$baseUrl`: 可以根据自己情况进行设置, 如果设置了完整的服务器名和路径，则返回的是url
-- `$blackList`: 筛选条件/参数黑名单, 例:['pageindex'].
+- `$filters`: 参数数组，例:['gender'=>'male', 'city'=>'beijing']
+- `$baseUrl`: 可以根据自己情况进行设置，默认为空，例:'www.example.com'
+- `$blackList`: 筛选条件/参数黑名单，例:['pageindex']
 
-### setBlackList($blackList)
+### setBlackList(array $list)
 
-设置筛选条件黑名单，可以在每次生成url的时候过滤掉你不想要的筛选条件/参数(比如分页参数等)
+设置筛选条件黑名单，可以在每次生成url的时候过滤掉你不想要的参数(比如分页参数等)
 
 示例：
 ```php
-$fm->setBlackList(['page','pageindex']);
+$fm->setBlackList(['page', 'pageindex']);
 
 //在laravel中
-FilterManager::setBlackList(['page','pageindex']);
+FilterManager::setBlackList(['page', 'pageindex']);
 ```
 
-### has($filter_name)
+### has($filterName)
 
-是否有指定筛选条件，如果有指定条件，会返回该过滤添加的值，否则返回false。
+是否有指定筛选条件，如果有则返回值，如果没有则返回false。
 
 示例：
 ```php
-$fm->has('gender');
+$value = $fm->has('gender');
 
 //或在laravel中:
-FilterManager::has('gender');
+$value = FilterManager::has('gender');
 ```
 
-### isActive($filter_name, $filter_value, $trueReturn, $falseReturn)
+### isActive($filterName, $filterValue, $trueReturn, $falseReturn)
 
 指定的筛选条件是否包含指点值。
 
@@ -126,29 +126,35 @@ FilterManager::has('gender');
 $fm->isActive('gender','male');
 
 //或在laravel中
-FilterManager::isActive('gender','male');#将会返回true 或 false;
-FilterManager::isActive('gender','male','active','not active');#将会返回 'active' 或 'not active';
+FilterManager::isActive('gender', 'male');//将会返回true 或 false;
+
+FilterManager::isActive('gender', 'male', 'active', '');//将会返回 'active' 或 '';
 ```
 
 ### url($filterName, $filterValue, $multi, $linkageRemoveFilters, $blackList)
 
 生成url。
 参数介绍：
-- `$filterName`: 筛选条件/参数
-- `$filterValue`: 筛选条件/参数的值, 默认值为：`\Toplan\FilterManager\FilterManager::ALL` , 表示为所有
-- `$multi`: 是否支持多个参数值？ true 为支持, 默认为false
-- `$linkageRemoveFilters`: 需要联动删除的筛选条件/参数
+- `$filterName`: 筛选条件/参数。
+- `$filterValue`: 筛选条件/参数的值，默认值为：`FM_SELECT_ALL`，表示为所有。
+- `$multi`: 是否支持多个参数值？true 为支持，默认为false。
+- `$linkageRemoveFilters`: 需要联动删除的筛选条件/参数。
 - `$blackList`: 临时黑名单，可以临时覆盖默认的黑名单。
 
 示例：
 ```php
-FilterManager::url('gender',\Toplan\FilterManager\FilterManager::ALL);//将会删除gender参数
+FilterManager::url('gender', FM_SELECT_ALL);//将会删除gender参数
 
-FilterManager::url('gender','male',false);//gender只能有一个值
+FilterManager::url('gender', 'male', false);//gender只能有一个值
 
-FilterManager::url('cities','成都',true);#
-FilterManager::url('cities','绵阳',true);#支持cities有多个值
+FilterManager::url('cities', '成都', true);#
+FilterManager::url('cities', '绵阳', true);#支持cities有多个值
 
-//一个省有多个城市，如果要取消选中‘省’这个条件，那么我们还可以通过第四个参数设置联动取消‘市’以及更多你想取消的筛选条件。
-FilterManager::url('province','四川',false,['cities']);//联动删除cities条件
-```
+//假设我们要对城镇区域进行筛选，首先我们知道一个省有多个城市，城市又有多个区、镇...
+//如果我们要选择‘全部’，或者选择任一一个其他省，
+//那么我们还需要通过第四个参数设置联动取消‘市’,‘区’,‘镇’等等你想取消的筛选条件。
+//
+//选择全部
+FilterManager::url('province', FM_SELECT_ALL, false, ['cities', 'counties', ...]);//联动删除cities等条件
+//选择一个省
+FilterManager::url('province', '四川', false, ['cities', 'counties', ...]);//联动删除cities等条件

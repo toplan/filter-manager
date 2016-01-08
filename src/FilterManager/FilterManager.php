@@ -37,11 +37,15 @@ class FilterManager
      * @param       $baseUrl
      * @param array $blackList
      */
-    public function __construct(array $filters, $baseUrl = '', array $blackList = array())
+    public function __construct(array $filters, $baseUrl = '', array $blackList = [])
     {
-        define('FM_SELECT_ALL', self::ALL);
-        $this->filters = $filters;
-        $this->baseUrl = str_replace('?', '', $baseUrl);
+        if (!defined('FM_SELECT_ALL')) {
+            define('FM_SELECT_ALL', self::ALL);
+        }
+        foreach ($filters as $name => $value) {
+            $this->addFilter($name, $value);
+        }
+        $this->baseUrl = explode('?', $baseUrl)[0];
         $this->blackList = $blackList;
     }
 
@@ -55,9 +59,7 @@ class FilterManager
 
     public static function create(array $filters, $baseUrl = '', array $blackList = [])
     {
-        $fm = new self($filters, $baseUrl, $blackList);
-
-        return $fm;
+        return new self($filters, $baseUrl, $blackList);
     }
 
     /**set base url
@@ -86,18 +88,21 @@ class FilterManager
         return $this;
     }
 
-    /**add filter
-     * @param        $name
+    /**
+     * add filter
+     * @param string $name
      * @param string $value
      *
      * @return $this
+     * @throws FilterManagerException
      */
-
-    public function addFilter($name, $value = '')
+    public function addFilter($name, $value)
     {
-        if ($name) {
-            array_push($this->filters, ["$name" => $value]);
+        $name = "$name";
+        if (empty($name)) {
+            throw new FilterManagerException('Filter name can`t be empty');
         }
+        $this->filters[$name] = "$value";
 
         return $this;
     }
@@ -117,15 +122,16 @@ class FilterManager
         return $this;
     }
 
-    /**has filter?
+    /**
+     * whether has character filter
      * @param $name
      *
-     * @return bool
+     * @return mixed
      */
 
     public function has($name)
     {
-        if ($name && isset($this->filters["$name"])) {
+        if (isset($this->filters["$name"])) {
             return $this->filters["$name"];
         }
 
@@ -148,7 +154,7 @@ class FilterManager
     {
         $currentFilters = $this->filters;
         if (!$name) {
-            return false;
+            return $falseReturn;
         }
         if (!$currentFilters || !isset($currentFilters["$name"])) {
             if ($value === self::ALL) {

@@ -34,19 +34,19 @@
         <fieldset class="filter_header">
         <ul class="filter_ul">
         <li>所有分类 ></li>
-        @if(FilterManager::has('gender'))
+        @if(FilterManager::has('gender') !== false)
             <li class="selected">性别：{{FilterManager::has('gender')}}&nbsp;
-            <a href="{{FilterManager::url('gender',\Toplan\FilterManager\FilterManager::ALL)}}" type="button" class="close">×</a>
+            <a href="{{FilterManager::url('gender', FM_SELECT_ALL)}}" type="button" class="close">×</a>
             </li>
         @endif
-        @if(FilterManager::has('types'))
+        @if(FilterManager::has('types') !== false)
             <li class="selected">方式：{{FilterManager::has('types')}}&nbsp;
-            <a href="{{FilterManager::url('types',\Toplan\FilterManager\FilterManager::ALL)}}" type="button" class="close">×</a>
+            <a href="{{FilterManager::url('types', FM_SELECT_ALL)}}" type="button" class="close">×</a>
             </li>
         @endif
-        @if(isset($current_filters['city']))
-            <li class="selected">城市：{{$current_filters['city']}}&nbsp;
-            <a href="{{FilterManager::url('city',\Toplan\FilterManager\FilterManager::ALL,true,['counties'])}}" type="button" class="close">×</a>
+        @if(FilterManager::has('city') !== false)
+            <li class="selected">城市：{{FilterManager::has('city')}}&nbsp;
+            <a href="{{FilterManager::url('city', FM_SELECT_ALL, true, ['counties', 'towns'])}}" type="button" class="close">×</a>
             </li>
         @endif
         </ul>
@@ -54,8 +54,8 @@
         <fieldset class="fieldset">
             <ul class="filter_ul">
             <li>教师性别：</li>
-                <li class="item all {{FilterManager::isActive('gender',\Toplan\FilterManager\FilterManager::ALL,'active','')}}">
-                    <a href="{{FilterManager::url('gender',\Toplan\FilterManager\FilterManager::ALL)}}">全部</a>
+                <li class="item all {{FilterManager::isActive('gender', FM_SELECT_ALL, 'active', '')}}">
+                    <a href="{{FilterManager::url('gender', FM_SELECT_ALL)}}">全部</a>
                 </li>
                 <li class="item @if(FilterManager::isActive('gender','male')) active @endif">
                     <a href="{{FilterManager::url('gender','male')}}">男</a>
@@ -68,8 +68,8 @@
         <fieldset class="fieldset">
            <ul class="filter_ul">
                <li>上课方式：</li>
-               <li class="item all @if(FilterManager::isActive('types',\Toplan\FilterManager\FilterManager::ALL)) active @endif">
-                    <a href="{{FilterManager::url('types',\Toplan\FilterManager\FilterManager::ALL)}}">全部</a></li>
+               <li class="item all @if(FilterManager::isActive('types', FM_SELECT_ALL)) active @endif">
+                    <a href="{{FilterManager::url('types', FM_SELECT_ALL)}}">全部</a></li>
                <li class="item @if(FilterManager::isActive('types','location_teacher')) active @endif">
                     <a href="{{FilterManager::url('types','location_teacher',true)}}">
                     <input type="checkbox" @if(FilterManager::isActive('types','location_teacher')) checked @endif />
@@ -98,8 +98,8 @@
         <fieldset class="fieldset">
           <ul class="filter_ul">
               <li>上课时间：</li>
-              <li class="item all @if(FilterManager::isActive('weekdays',\Toplan\FilterManager\FilterManager::ALL)) active @endif">
-              <a href="{{FilterManager::url('weekdays',\Toplan\FilterManager\FilterManager::ALL)}}">全部</a>
+              <li class="item all @if(FilterManager::isActive('weekdays', FM_SELECT_ALL)) active @endif">
+              <a href="{{FilterManager::url('weekdays', FM_SELECT_ALL)}}">全部</a>
               </li>
               <li class="item @if(FilterManager::isActive('weekdays','1')) active @endif">
               <a href="{{FilterManager::url('weekdays','1',true)}}">
@@ -134,7 +134,7 @@
         <fieldset class="fieldset">
           <ul class="filter_ul">
               <li>其他条件：</li>
-              <li class="item all @if(FilterManager::isActive('others',\Toplan\FilterManager\FilterManager::ALL)) active @endif "><a href="{{FilterManager::url('others')}}">全部</a></li>
+              <li class="item all @if(FilterManager::isActive('others', FM_SELECT_ALL)) active @endif "><a href="{{FilterManager::url('others')}}">全部</a></li>
               <li class="item @if(FilterManager::isActive('others','verify')) active @endif">
               <a href="{{FilterManager::url('others','verify',true)}}"><input type="checkbox" @if(FilterManager::isActive('others','verify')) checked @endif />&nbsp;认证教师</a>
               </li>

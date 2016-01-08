@@ -81,45 +81,52 @@ or use laravel facade value `FilterManager` in template:
 
 # Commonly used method
 
-### create($filters,$baseUrl,$blackList)
+### create(array $filters, $baseUrl, $blackList)
 
 create a instance.
 
-- `$filters`: this is filters data ,required,exp:['gender'=>'male','city'=>'beijing']
+- `$filters`: this is filters data, required, exp:['gender'=>'male', 'city'=>'beijing']
 
-- `$baseUrl`: default=array().
+- `$baseUrl`: default value is ``.
 
-- `$blackList`: this is blacklist for filtrs,default=array(),exp:['pageindex'].
+- `$blackList`: this is blacklist for filters, default value is `[]`, exp:['pageindex'].
  
-### setBlackList($filter_name_array)
+### setBlackList(array $list)
 
 set black list for filter.
 
 example:
 ```php
-$fm->setBlackList(['page','pageindex']);
+$fm->setBlackList(['page', 'pageindex']);
 //or in laravel
-FilterManager::setBlackList(['page','pageindex']);
+FilterManager::setBlackList(['page', 'pageindex']);
 ```
 
-### has($filter_name)
+### has($filterName)
 
-has filter, return value or false.
+whether has the character filter, if true will return the value, if don`t return false.
 
 example:
 ```php
-$fm->has('gender');
+$value = $fm->has('gender');
+
 //or in laravel
-FilterManager::has('gender');
+$value = FilterManager::has('gender');
 ```
+
+### getFilterValue($filterName)
+
+get filter value.
+
  
-### isActive($filter_name, $filter_value, $trueReturn, $falseReturn)
+### isActive($filterName, $filterValue, $trueReturn, $falseReturn)
 
 example:
 ```php
 //in laravel
-FilterManager::isActive('gender','male');#this will return true or false;
-FilterManager::isActive('gender','male','active','not active');#this will return 'active' or 'not active';
+FilterManager::isActive('gender', 'male');//this will return true or false;
+
+FilterManager::isActive('gender', 'male', 'active', '');//this will return 'active' or '';
 ```
  
 ### url($filterName, $filterValue, $multi, $linkageRemoveFilters, $blackList)
@@ -128,23 +135,31 @@ One filter has some values, and every value has a url, this method return a full
 
 - `$filterName`: param name, required.
 
-- `$filterValue`: param value, default value:\Toplan\FilterManager\FilterManager::ALL.
+- `$filterValue`: param value, default value is `FM_SELECT_ALL`.
 
-- `$multi`: whether to support multiple? false or true, default=false.
+- `$multi`: whether to support multiple? `false` or `true`, default value is `false`.
 
-- `$linkageRemoveFilters`：linkage remove the other filter, default=array().
+- `$linkageRemoveFilters`：linkage remove the other filter, default value is `[]`.
 
-- `$blackList`: temporary blacklist, default=array().
+- `$blackList`: temporary blacklist, default value is ``[]``.
 
 example:
 ```php
 //in laravel
-FilterManager::url('gender',\Toplan\FilterManager\FilterManager::ALL);//without gender param
+FilterManager::url('gender', FM_SELECT_ALL);//without gender param
 
-FilterManager::url('gender','male',false);#single value
+FilterManager::url('gender', 'male', false);//single value
 
-FilterManager::url('cities','beijing',true);#multiple values
+FilterManager::url('cities', 'shanghai', true);
+FilterManager::url('cities', 'beijing', true);//multiple values
 
-//One province has many cities,If you remove the 'province tag',you should linkage remove the selected cities
-FilterManager::url('province','chengdu',false,['cities']);//linkage remove selected cities
+// One province has many cities, one city has many counties ...,
+// If you select 'all province' or one of provinces,
+// you should linkage remove the selected cities and counties ...
+//
+// like this:
+// select all province
+FilterManager::url('province', FM_SELECT_ALL, false, ['cities', 'counties', ...]);//linkage remove selected cities
+// select one province
+FilterManager::url('province', 'sichuan', false, ['cities', 'counties', ...]);//linkage remove selected cities
 ```
