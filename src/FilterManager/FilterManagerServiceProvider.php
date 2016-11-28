@@ -2,6 +2,7 @@
 
 namespace Toplan\FilterManager;
 
+use Illuminate\Support\Facades\Input;
 use Illuminate\Support\ServiceProvider;
 
 class FilterManagerServiceProvider extends ServiceProvider
@@ -21,7 +22,7 @@ class FilterManagerServiceProvider extends ServiceProvider
     public function register()
     {
         $this->app['FilterManager'] = $this->app->share(function () {
-                return FilterManager::create(\Input::all())->setBlackList(['page']);
+                return FilterManager::create(Input::all())->setBlackList(['page']);
             });
     }
 
