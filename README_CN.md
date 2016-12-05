@@ -81,7 +81,7 @@ $fm = FilterManager::create($paramsArray)->setBlackList(['page']);
 
 更多的详细用法参见: demo_temp_for_laravel.blade.php
 
-# 常用方法
+# API
 
 基本上所有常用用法都在该文件中: demo_temp_for_laravel.blade.php
 

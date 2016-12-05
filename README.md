@@ -79,7 +79,7 @@ or use laravel facade value `FilterManager` in template:
 </li>
 ```
 
-# Commonly used method
+# API
 
 ### create(array $filters, $baseUrl, $blackList)
 
@@ -87,7 +87,7 @@ create a instance.
 
 - `$filters`: this is filters data, required, exp:['gender'=>'male', 'city'=>'beijing']
 
-- `$baseUrl`: default value is ``.
+- `$baseUrl`: default value is empty string.
 
 - `$blackList`: this is blacklist for filters, default value is `[]`, exp:['pageindex'].
  
@@ -132,7 +132,7 @@ One filter has some values, and every value has a url, this method return a full
 
 - `$filterValue`: param value, default value is `FM_SELECT_ALL`.
 
-- `$multi`: whether to support multiple? `false` or `true`, default value is `false`.
+- `$multi`: whether to support multiple values? `false` or `true`, default value is `false`.
 
 - `$linkageRemoveFilters`：linkage remove the other filter, default value is `[]`.
 
