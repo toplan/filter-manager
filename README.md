@@ -11,7 +11,7 @@ This page used FilterManager: [kiteme.cn/list](http://kiteme.cn/list)
 # Install
 
 ```php
-composer require 'toplan/filter-manager:~1.0.2'
+composer require 'toplan/filter-manager:~1.0.4'
 ```
 
 # Usage
@@ -55,13 +55,13 @@ use value `$fm` in template:
 ```html
 <!-- example -->
 <li class="item all {{$fm->isActive('gender', FM_SELECT_ALL, 'active', '')}}">
-  <a href="{{$fm->url('gender',\Toplan\FilterManager\FilterManager::ALL)}}">All</a>
+  <a href="{{$fm->url('gender', FM_SELECT_ALL)}}">All</a>
 </li>
 <li class="item @if($fm->isActive('gender', 'male')) active @endif">
-  <a href="{{$fm->url('gender','male')}}">Male</a>
+  <a href="{{$fm->url('gender', 'male')}}">Male</a>
 </li>
 <li class="item @if($fm->isActive('gender', 'female')) active @endif">
-  <a href="{{$fm->url('gender','female')}}">Female</a>
+  <a href="{{$fm->url('gender', 'female')}}">Female</a>
 </li>
 ```
 
@@ -69,13 +69,13 @@ or use laravel facade value `FilterManager` in template:
 ```html
 <!-- example -->
 <li class="item all {{FilterManager::isActive('gender', FM_SELECT_ALL, 'active', '')}}">
-  <a href="{{FilterManager::url('gender',\Toplan\FilterManager\FilterManager::ALL)}}">All</a>
+  <a href="{{FilterManager::url('gender', FM_SELECT_ALL)}}">All</a>
 </li>
 <li class="item @if(FilterManager::isActive('gender', 'male')) active @endif">
   <a href="{{FilterManager::url('gender', 'male')}}">Male</a>
 </li>
 <li class="item @if(FilterManager::isActive('gender','female')) active @endif">
-  <a href="{{FilterManager::url('gender','female')}}">Female</a>
+  <a href="{{FilterManager::url('gender', 'female')}}">Female</a>
 </li>
 ```
 

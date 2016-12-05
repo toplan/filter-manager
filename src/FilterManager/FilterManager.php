@@ -7,7 +7,7 @@ namespace Toplan\FilterManager;
  */
 class FilterManager
 {
-    const ALL = 'FilterManager_SelectAll';
+    const ALL = '__fm_select_all__';
 
     /**
      * core data:current filters
