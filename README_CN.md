@@ -1,7 +1,6 @@
-# 筛选条件(参数)管理器
+# 简介
 
 该包主要用于资源列表页面筛选器，可以让我们优雅灵活的生成筛选链接。
-这个页面就使用了该包：[kiteme.cn/list](http://kiteme.cn/list)
 
 ![demo image](fm-demo.png)
 
@@ -15,7 +14,7 @@ composer require 'toplan/filter-manager:~1.0.4'
 
 # 打开姿势
 
-###1. 准备工作
+### 1. 准备工作
 
 ```php
 //假设这是在你的控制器中
@@ -49,7 +48,7 @@ $fm = FilterManager::create($paramsArray)->setBlackList(['page']);
     )
 ```
 
-###2. Just enjoy it!
+### 2. Just enjoy it!
 
 在模板中使用`$fm`:
 ```html
@@ -79,7 +78,7 @@ $fm = FilterManager::create($paramsArray)->setBlackList(['page']);
 </li>
 ```
 
-更多的详细用法参见: demo_temp_for_laravel.blade.php
+更多的详细用法参见: demo.md
 
 # API
 

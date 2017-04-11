@@ -1,3 +1,4 @@
+```php
 <html>
 <head>
     <title>FilterManger</title>
@@ -154,3 +155,4 @@ $('.filter_wrap li.item a input:checkbox').click(function(){
         });
 </script>
 </html>
+```

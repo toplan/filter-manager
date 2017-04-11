@@ -1,8 +1,6 @@
-# FilterManager
+# Intro
 
-filter manager package for product list filter,let`s elegant generate filter url.
-
-This page used FilterManager: [kiteme.cn/list](http://kiteme.cn/list)
+A filter manager package for the product list filter, help you elegant generate filter url.
 
 **[中文文档](https://github.com/toplan/FilterManager/blob/master/README_CN.md)**
 
@@ -16,7 +14,7 @@ composer require 'toplan/filter-manager:~1.0.4'
 
 # Usage
 
-###1. The preparatory work
+### 1. The preparatory work
 
 ```php
 require 'path/to/vendor/autoload.php';
@@ -49,7 +47,7 @@ Find the aliases key in config/app.php.
     )
 ```
 
-###2. Just enjoy it
+### 2. Just enjoy it
 
 use value `$fm` in template:
 ```html
